@@ -15,6 +15,10 @@
   <link rel="apple-touch-icon" href="icons/icon.svg">
   <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
 
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -23,139 +27,212 @@
 </head>
 <body>
 
-<div class="app" id="app">
+<div class="app" id="app" data-screen="inicio">
 
-  <!-- ==============================
-       PANTALLA: INICIO
-  =============================== -->
-  <section class="screen screen--inicio active" id="screen-inicio" role="main" aria-label="Inicio">
-    <div class="inicio">
+  <!-- ══════════════════════════════════
+       SIDEBAR — solo desktop
+  ══════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
 
-      <div class="inicio__top">
-        <span class="chip">Patagonia · Argentina</span>
+    <a href="#" class="sidebar__brand" aria-label="Inicio">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+        <rect width="36" height="36" rx="10" fill="white" opacity="0.12"/>
+        <circle cx="18" cy="15" r="8.5" fill="#F5EDD8"/>
+        <circle cx="15" cy="12.5" r="1.7" fill="#8B5E3C" opacity="0.65"/>
+        <circle cx="21" cy="13.8" r="1.4" fill="#8B5E3C" opacity="0.55"/>
+        <circle cx="17" cy="18" r="1.5" fill="#8B5E3C" opacity="0.65"/>
+        <circle cx="21.5" cy="18.5" r="1.2" fill="#8B5E3C" opacity="0.5"/>
+        <path d="M5 30 L11 23 L15.5 26.5 L18 24 L21.5 27 L26 23 L31 30Z" fill="#C4904A" opacity="0.9"/>
+      </svg>
+      <div class="sidebar__brand-text">
+        <span class="sidebar__brand-name">Galletas Patag.</span>
+        <span class="sidebar__brand-sub">Patagonia · Argentina</span>
       </div>
+    </a>
 
-      <div class="inicio__center">
-        <h1 class="inicio__title">
-          Ruta de las<br>
-          <em>Galletas</em><br>
-          Patagónicas
-        </h1>
-      </div>
+    <nav class="sidebar__nav" aria-label="Navegación principal">
+      <button class="snav-item active" data-screen="inicio" aria-current="page">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 8L9 2l7 6v7.5a.5.5 0 01-.5.5H12v-4H6v4H2.5a.5.5 0 01-.5-.5V8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Inicio
+      </button>
+      <button class="snav-item" data-screen="ruta">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="4" cy="5" r="1.8" stroke="currentColor" stroke-width="1.5"/><circle cx="14" cy="13" r="1.8" stroke="currentColor" stroke-width="1.5"/><path d="M4 6.8c0 3.5 3.5 3.5 5 5s5 1.2 5 1.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="1.2" fill="currentColor" opacity="0.4"/></svg>
+        La Ruta
+      </button>
+      <button class="snav-item" data-screen="info">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M9 8.5v5M9 6v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Info
+      </button>
+    </nav>
 
-      <div class="inicio__bottom">
-        <div class="inicio__stats">
-          <div class="istat">
-            <span class="istat__n">14</span>
-            <span class="istat__l">Productores</span>
+    <div class="sidebar__footer">
+      <button id="sidebar-install-btn" class="sidebar__install" hidden>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M4.5 6.5L7 9l2.5-2.5M2 12h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Instalar app
+      </button>
+      <p class="sidebar__copy">© 2026 · Patagonia</p>
+    </div>
+
+  </aside>
+
+  <!-- ══════════════════════════════════
+       ÁREA PRINCIPAL
+  ══════════════════════════════════ -->
+  <div class="main" id="main">
+
+    <!-- PANTALLA: INICIO -->
+    <section class="screen screen--inicio active" id="screen-inicio" role="main">
+      <div class="inicio">
+        <div class="inicio__top">
+          <span class="chip">Patagonia · Argentina</span>
+        </div>
+        <div class="inicio__center">
+          <h1 class="inicio__title">
+            Ruta de las<br>
+            <em>Galletas</em><br>
+            Patagónicas
+          </h1>
+        </div>
+        <div class="inicio__bottom">
+          <div class="inicio__stats">
+            <div class="istat"><span class="istat__n">14</span><span class="istat__l">Productores</span></div>
+            <span class="istat__sep" aria-hidden="true"></span>
+            <div class="istat"><span class="istat__n">1</span><span class="istat__l">Ruta</span></div>
+            <span class="istat__sep" aria-hidden="true"></span>
+            <div class="istat"><span class="istat__n">100%</span><span class="istat__l">Artesanal</span></div>
           </div>
-          <span class="istat__sep" aria-hidden="true"></span>
-          <div class="istat">
-            <span class="istat__n">1</span>
-            <span class="istat__l">Ruta</span>
-          </div>
-          <span class="istat__sep" aria-hidden="true"></span>
-          <div class="istat">
-            <span class="istat__n">100%</span>
-            <span class="istat__l">Artesanal</span>
-          </div>
+          <button class="inicio__cta" data-screen="ruta">
+            Ver productores
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
       </div>
+    </section>
 
-    </div>
-  </section>
-
-  <!-- ==============================
-       PANTALLA: RUTA
-  =============================== -->
-  <section class="screen screen--ruta" id="screen-ruta" aria-label="La Ruta" hidden>
-    <div class="screen__header">
-      <h2 class="screen__title">La Ruta</h2>
-      <span class="screen__meta">14 productores</span>
-    </div>
-    <div class="screen__body">
-      <ul class="producer-list" id="producer-list" role="list">
-        <!-- Renderizado por JS -->
-      </ul>
-    </div>
-  </section>
-
-  <!-- ==============================
-       PANTALLA: INFO
-  =============================== -->
-  <section class="screen screen--info" id="screen-info" aria-label="Información" hidden>
-    <div class="screen__header">
-      <h2 class="screen__title">Sobre la ruta</h2>
-    </div>
-    <div class="screen__body">
-      <div class="info-block">
-        <p>La Ruta de las Galletas Patagónicas reúne a 14 productores artesanales que elaboran galletas con identidad local, usando ingredientes de la región y recetas únicas.</p>
-        <p>Cada parada es una historia. Cada galleta, un pedazo de Patagonia.</p>
+    <!-- PANTALLA: RUTA (cards) -->
+    <section class="screen screen--ruta" id="screen-ruta">
+      <div class="screen__header">
+        <div>
+          <h2 class="screen__title">La Ruta</h2>
+          <span class="screen__meta">14 productores artesanales</span>
+        </div>
       </div>
+      <div class="cards-grid" id="cards-grid" role="list">
+        <!-- Renderizado por JS -->
+      </div>
+    </section>
 
-      <ul class="info-list" role="list">
-        <li class="info-row" role="listitem">
-          <span class="info-row__label">Región</span>
-          <span class="info-row__val">Patagonia, Argentina</span>
-        </li>
-        <li class="info-row" role="listitem">
-          <span class="info-row__label">Productores</span>
-          <span class="info-row__val">14</span>
-        </li>
-        <li class="info-row" role="listitem">
-          <span class="info-row__label">Elaboración</span>
-          <span class="info-row__val">100% artesanal</span>
-        </li>
-      </ul>
+    <!-- PANTALLA: INFO -->
+    <section class="screen screen--info" id="screen-info">
+      <div class="screen__header">
+        <h2 class="screen__title">Sobre la ruta</h2>
+      </div>
+      <div class="screen__body">
+        <div class="info-block">
+          <p>La Ruta de las Galletas Patagónicas reúne a 14 productores artesanales que elaboran galletas con identidad local, usando ingredientes de la región y recetas únicas.</p>
+          <p>Cada parada es una historia. Cada galleta, un pedazo de Patagonia.</p>
+        </div>
+        <ul class="info-list" role="list">
+          <li class="info-row"><span class="info-row__k">Región</span><span class="info-row__v">Patagonia, Argentina</span></li>
+          <li class="info-row"><span class="info-row__k">Productores</span><span class="info-row__v">14</span></li>
+          <li class="info-row"><span class="info-row__k">Elaboración</span><span class="info-row__v">100% artesanal</span></li>
+        </ul>
+        <button id="install-btn" class="install-row" hidden>
+          <span class="install-row__icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v9M6 8l3 3 3-3M2 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="install-row__text">Instalar aplicación</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </section>
 
-      <button id="install-btn" class="install-row" hidden aria-label="Instalar aplicación">
-        <span class="install-row__icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path d="M9 2v9M6 8l3 3 3-3M3 15h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        <span class="install-row__text">Instalar aplicación</span>
-        <svg class="install-row__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    </div>
-  </section>
+  </div><!-- /main -->
 
-  <!-- ==============================
-       NAV INFERIOR
-  =============================== -->
+  <!-- ══════════════════════════════════
+       BOTTOM NAV — solo mobile
+  ══════════════════════════════════ -->
   <nav class="bottom-nav" role="navigation" aria-label="Navegación principal">
-
     <button class="nav-item active" data-screen="inicio" aria-label="Inicio" aria-current="page">
-      <svg class="nav-item__icon" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-        <path d="M3 9.5L11 3l8 6.5V19a1 1 0 01-1 1H14v-5H8v5H4a1 1 0 01-1-1V9.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <svg class="nav-item__icon" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 9.5L11 3l8 6.5V19a1 1 0 01-1 1H14v-5H8v5H4a1 1 0 01-1-1V9.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <span class="nav-item__label">Inicio</span>
     </button>
-
     <button class="nav-item" data-screen="ruta" aria-label="La Ruta">
-      <svg class="nav-item__icon" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-        <circle cx="5" cy="6" r="2" stroke="currentColor" stroke-width="1.5"/>
-        <circle cx="17" cy="16" r="2" stroke="currentColor" stroke-width="1.5"/>
-        <path d="M5 8c0 4 4 4 6 6s6 2 6 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="11" cy="11" r="1.5" fill="currentColor" opacity="0.5"/>
-      </svg>
+      <svg class="nav-item__icon" width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="5" cy="6" r="2" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="16" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 8c0 4 4 4 6 6s6 2 6 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="11" cy="11" r="1.5" fill="currentColor" opacity="0.5"/></svg>
       <span class="nav-item__label">Ruta</span>
     </button>
-
     <button class="nav-item" data-screen="info" aria-label="Información">
-      <svg class="nav-item__icon" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-        <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.5"/>
-        <path d="M11 10v6M11 7.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
+      <svg class="nav-item__icon" width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M11 10v6M11 7.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
       <span class="nav-item__label">Info</span>
     </button>
-
   </nav>
 
-</div>
+  <!-- ══════════════════════════════════
+       DETALLE DEL PRODUCTOR (overlay)
+  ══════════════════════════════════ -->
+  <div class="detail-overlay" id="detail-overlay" aria-modal="true" role="dialog" aria-label="Detalle del productor">
 
+    <!-- Header sticky -->
+    <div class="det-header" id="det-header">
+      <button class="det-back" id="det-back" aria-label="Volver">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <span class="det-header__stop" id="det-stop"></span>
+    </div>
+
+    <!-- Contenido desplazable -->
+    <div class="det-scroll" id="det-scroll">
+
+      <!-- Hero -->
+      <div class="det-hero" id="det-hero">
+        <p class="det-hero__num" id="det-hero-num"></p>
+        <h1 class="det-hero__name" id="det-hero-name"></h1>
+        <p class="det-hero__loc" id="det-hero-loc">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1C4.57 1 3 2.57 3 4.5c0 2.625 3.5 7.5 3.5 7.5S10 7.125 10 4.5C10 2.57 8.43 1 6.5 1zm0 4.75a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5z" fill="currentColor" opacity="0.7"/></svg>
+          <span id="det-loc-text"></span>
+        </p>
+      </div>
+
+      <!-- Sección: La galleta -->
+      <section class="det-section" id="det-sec-galleta">
+        <h2 class="det-section__title">La galleta</h2>
+        <div id="det-galleta-body"></div>
+      </section>
+
+      <!-- Sección: El productor -->
+      <section class="det-section" id="det-sec-historia">
+        <h2 class="det-section__title">El productor</h2>
+        <div id="det-historia-body"></div>
+      </section>
+
+      <!-- Sección: Cómo llegar -->
+      <section class="det-section det-section--map" id="det-sec-map">
+        <h2 class="det-section__title">Cómo llegar</h2>
+        <div class="det-map-wrap">
+          <div id="detail-map"></div>
+        </div>
+        <p class="det-address" id="det-address"></p>
+      </section>
+
+      <div class="det-scroll__spacer"></div>
+    </div>
+
+    <!-- Acciones fijas al pie -->
+    <div class="det-actions" id="det-actions">
+      <button class="det-btn det-btn--contact" id="det-btn-contact">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 10.667c0 .244-.054.486-.164.72a2.742 2.742 0 01-.456.673c-.36.4-.756.6-1.173.6-.307 0-.64-.073-.987-.226a9.77 9.77 0 01-.987-.533 15.24 15.24 0 01-.96-.747 15.077 15.077 0 01-.74-.96 9.5 9.5 0 01-.527-.986C7.673 8.76 7.6 8.427 7.6 8.107c0-.307.067-.6.2-.867a2.08 2.08 0 01.6-.726c.28-.2.587-.3.907-.3.12 0 .24.027.347.08.113.054.213.134.293.247l1.014 1.427c.08.11.14.213.18.313.04.093.06.18.06.26 0 .1-.027.2-.08.293a1.26 1.26 0 01-.213.267l-.287.3a.193.193 0 00-.06.14c0 .027.007.053.02.08.02.026.04.053.053.08.08.153.22.347.42.58.207.233.427.47.66.7.233.233.467.447.707.647.233.2.427.333.58.4l.08.04a.26.26 0 00.12.026.2.2 0 00.147-.06l.287-.293c.1-.1.2-.18.293-.22a.6.6 0 01.24-.073c.08 0 .16.02.253.06.094.04.2.1.314.18l1.44 1.027c.113.08.193.173.24.28.04.106.06.213.06.326z" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10"/></svg>
+        Contacto
+      </button>
+      <button class="det-btn det-btn--map" id="det-btn-map">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5C5.52 1.5 3.5 3.52 3.5 6c0 3.281 4.5 9 4.5 9s4.5-5.719 4.5-9c0-2.48-2.02-4.5-4.5-4.5zm0 6.125A1.625 1.625 0 118 4.25a1.625 1.625 0 010 3.375z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        Cómo llegar
+      </button>
+    </div>
+
+  </div><!-- /detail-overlay -->
+
+</div><!-- /app -->
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLs=" crossorigin=""></script>
 <script src="js/app.js"></script>
 </body>
 </html>
