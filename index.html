@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruta de las Galletas Patagónicas</title>
+  <meta name="description" content="14 productores artesanales unidos por el sabor de la Patagonia. Descubrí la Ruta de las Galletas Patagónicas.">
+  <meta name="theme-color" content="#2A3828">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Galletas Patag.">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Ruta de las Galletas Patagónicas">
+  <meta property="og:description" content="14 productores artesanales unidos por el sabor de la Patagonia.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <header class="nav">
+    <div class="nav__inner container">
+      <a href="#" class="nav__logo" aria-label="Ruta de las Galletas Patagónicas">
+        <svg class="nav__logo-mark" width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+          <rect width="34" height="34" rx="9" fill="#2A3828"/>
+          <circle cx="17" cy="14.5" r="8" fill="#F5EDD8"/>
+          <circle cx="14.2" cy="12" r="1.6" fill="#8B5E3C" opacity="0.65"/>
+          <circle cx="19.8" cy="13.5" r="1.3" fill="#8B5E3C" opacity="0.55"/>
+          <circle cx="16" cy="17.2" r="1.4" fill="#8B5E3C" opacity="0.65"/>
+          <circle cx="20.5" cy="17.8" r="1.1" fill="#8B5E3C" opacity="0.5"/>
+          <circle cx="13.8" cy="16.5" r="1.1" fill="#8B5E3C" opacity="0.55"/>
+          <path d="M5 28 L10.5 21.5 L14.5 24.5 L17 22 L20.5 25 L24.5 21 L29 28Z" fill="#C4904A" opacity="0.85"/>
+        </svg>
+        <span class="nav__logo-text">Ruta de las Galletas</span>
+      </a>
+      <button id="install-btn" class="btn btn--install" hidden aria-label="Instalar aplicación">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 2v8M5 7l3 3 3-3M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Instalar app
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero__content container">
+      <div class="hero__badge">Patagonia · Argentina</div>
+      <h1 class="hero__title">
+        Ruta de las<br>
+        <em>Galletas Patagónicas</em>
+      </h1>
+      <p class="hero__subtitle">
+        Una ruta artesanal que conecta productores locales<br>
+        a través del sabor auténtico de la Patagonia.
+      </p>
+      <div class="hero__stats">
+        <div class="stat">
+          <span class="stat__number">14</span>
+          <span class="stat__label">Productores</span>
+        </div>
+        <span class="stat__divider" aria-hidden="true"></span>
+        <div class="stat">
+          <span class="stat__number">1</span>
+          <span class="stat__label">Ruta</span>
+        </div>
+        <span class="stat__divider" aria-hidden="true"></span>
+        <div class="stat">
+          <span class="stat__number">100%</span>
+          <span class="stat__label">Artesanal</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero__illustration" aria-hidden="true">
+      <svg viewBox="0 0 520 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 300 L70 180 L130 230 L190 130 L250 195 L310 100 L370 165 L430 110 L520 300Z" fill="#2A3828" opacity="0.06"/>
+        <path d="M0 300 L50 215 L100 250 L160 185 L220 235 L280 165 L340 210 L400 155 L460 200 L520 300Z" fill="#C4904A" opacity="0.08"/>
+        <circle cx="400" cy="90" r="55" fill="#F5EDD8" opacity="0.5"/>
+        <circle cx="400" cy="90" r="55" stroke="#E8D5B0" stroke-width="2" fill="none" opacity="0.4"/>
+        <circle cx="385" cy="77" r="6" fill="#8B5E3C" opacity="0.3"/>
+        <circle cx="408" cy="83" r="5" fill="#8B5E3C" opacity="0.25"/>
+        <circle cx="393" cy="100" r="5.5" fill="#8B5E3C" opacity="0.3"/>
+        <circle cx="415" cy="98" r="4.5" fill="#8B5E3C" opacity="0.22"/>
+        <circle cx="378" cy="97" r="4.5" fill="#8B5E3C" opacity="0.28"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===== SOBRE LA RUTA ===== -->
+  <section class="about section" id="sobre">
+    <div class="container">
+      <div class="about__inner">
+        <div class="about__text">
+          <span class="label">Sobre la ruta</span>
+          <h2 class="about__title">Una ruta hecha de<br>sabor y territorio</h2>
+          <p>La Ruta de las Galletas Patagónicas reúne a 14 productores artesanales que elaboran galletas con identidad local, usando ingredientes de la región y recetas únicas.</p>
+          <p>Cada parada es una historia. Cada galleta, un pedazo de Patagonia.</p>
+        </div>
+        <div class="about__route" aria-hidden="true" id="route-visual">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRODUCTORES ===== -->
+  <section class="productores section" id="productores">
+    <div class="container">
+      <header class="section-header">
+        <span class="label">Los productores</span>
+        <h2 class="section-title">14 paradas en la ruta</h2>
+      </header>
+      <div class="productores__grid" id="productores-grid" role="list">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <p class="footer__name">Ruta de las Galletas Patagónicas</p>
+          <p class="footer__tagline">Sabor artesanal de la Patagonia</p>
+        </div>
+        <p class="footer__copy">© 2026 · Patagonia, Argentina</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

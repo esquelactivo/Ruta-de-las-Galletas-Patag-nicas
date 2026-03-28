@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="115" fill="#2A3828"/>
+
+  <!-- Cookie body -->
+  <circle cx="256" cy="220" r="130" fill="#F5EDD8"/>
+  <circle cx="256" cy="220" r="130" fill="none" stroke="#E8D5B0" stroke-width="4"/>
+
+  <!-- Cookie texture (chips) -->
+  <ellipse cx="215" cy="183" rx="15" ry="13" fill="#8B5E3C" opacity="0.6" transform="rotate(-12 215 183)"/>
+  <ellipse cx="272" cy="196" rx="13" ry="11" fill="#8B5E3C" opacity="0.52" transform="rotate(8 272 196)"/>
+  <ellipse cx="243" cy="244" rx="14" ry="12" fill="#8B5E3C" opacity="0.58" transform="rotate(-5 243 244)"/>
+  <ellipse cx="300" cy="232" rx="11" ry="10" fill="#8B5E3C" opacity="0.48" transform="rotate(18 300 232)"/>
+  <ellipse cx="205" cy="238" rx="12" ry="10" fill="#8B5E3C" opacity="0.54" transform="rotate(-8 205 238)"/>
+  <ellipse cx="268" cy="170" rx="10" ry="9"  fill="#8B5E3C" opacity="0.44" transform="rotate(5 268 170)"/>
+  <ellipse cx="228" cy="208" rx="9"  ry="8"  fill="#8B5E3C" opacity="0.42"/>
+
+  <!-- Mountain silhouette -->
+  <path d="M 60 424 L 135 318 L 192 370 L 256 285 L 320 355 L 378 308 L 452 424 Z" fill="#C4904A" opacity="0.88"/>
+</svg>

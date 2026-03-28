@@ -1,0 +1,22 @@
+{
+  "name": "Ruta de las Galletas Patagónicas",
+  "short_name": "Galletas Patag.",
+  "description": "14 productores artesanales unidos por el sabor de la Patagonia.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F8F6F2",
+  "theme_color": "#2A3828",
+  "lang": "es",
+  "dir": "ltr",
+  "categories": ["food", "travel", "lifestyle"],
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
