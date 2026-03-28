@@ -4,7 +4,7 @@
    Incrementá la versión (v1 → v2, etc.) al publicar cambios.
    ============================================================ */
 
-const CACHE_APP   = 'rgp-app-v3';
+const CACHE_APP   = 'rgp-app-v4';
 const CACHE_FONTS = 'rgp-fonts-v1';
 
 const APP_ASSETS = [

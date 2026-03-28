@@ -1,0 +1,128 @@
+[
+  {
+    "id": "1", "orden": 1,
+    "nombre": "Reina Mora",
+    "galleta": null, "ubicacion": null, "coordenadas": null,
+    "descripcion": null, "historia": null, "ingredientes": [],
+    "color": "#7B2D5E", "colorOscuro": "#4E1A3C",
+    "logo": null, "imagen": null, "maps_url": null,
+    "contacto": { "whatsapp": null, "instagram": null, "email": null, "web": null }
+  },
+  {
+    "id": "2", "orden": 2,
+    "nombre": "Pueblo Carao",
+    "galleta": null, "ubicacion": null, "coordenadas": null,
+    "descripcion": null, "historia": null, "ingredientes": [],
+    "color": "#C05A20", "colorOscuro": "#8A3A10",
+    "logo": null, "imagen": null, "maps_url": null,
+    "contacto": { "whatsapp": null, "instagram": null, "email": null, "web": null }
+  },
+  {
+    "id": "3", "orden": 3,
+    "nombre": "Croeso",
+    "galleta": null, "ubicacion": null, "coordenadas": null,
+    "descripcion": null, "historia": null, "ingredientes": [],
+    "color": "#2B5FA8", "colorOscuro": "#1A3D78",
+    "logo": null, "imagen": null, "maps_url": null,
+    "contacto": { "whatsapp": null, "instagram": null, "email": null, "web": null }
+  },
+  {
+    "id": "4", "orden": 4,
+    "nombre": "Haiku",
+    "galleta": null, "ubicacion": null, "coordenadas": null,
+    "descripcion": null, "historia": null, "ingredientes": [],
+    "color": "#4A5568", "colorOscuro": "#2D3447",
+    "logo": null, "imagen": null, "maps_url": null,
+    "contacto": { "whatsapp": null, "instagram": null, "email": null, "web": null }
+  },
+  {
+    "id": "5", "orden": 5,
+    "nombre": "Tyte",
+    "galleta": null, "ubicacion": null, "coordenadas": null,
+    "descripcion": null, "historia": null, "ingredientes": [],
+    "color": "#C0392B", "colorOscuro": "#8C1B11",
+    "logo": null, "imagen": null, "maps_url": null,
+    "contacto": { "whatsapp": null, "instagram": null, "email": null, "web": null }
+  },
+  {
+    "id": "6", "orden": 6,
+    "nombre": "Tierra Caracol",
+    "galleta": null, "ubicacion": null, "coordenadas": null,
+    "descripcion": null, "historia": null, "ingredientes": [],
+    "color": "#7D6B47", "colorOscuro": "#5A4A28",
+    "logo": null, "imagen": null, "maps_url": null,
+    "contacto": { "whatsapp": null, "instagram": null, "email": null, "web": null }
+  },
+  {
+    "id": "7", "orden": 7,
+    "nombre": "Tierra de Brotes",
+    "galleta": null, "ubicacion": null, "coordenadas": null,
+    "descripcion": null, "historia": null, "ingredientes": [],
+    "color": "#3D7A4A", "colorOscuro": "#225830",
+    "logo": null, "imagen": null, "maps_url": null,
+    "contacto": { "whatsapp": null, "instagram": null, "email": null, "web": null }
+  },
+  {
+    "id": "8", "orden": 8,
+    "nombre": "Nain Maggie",
+    "galleta": null, "ubicacion": null, "coordenadas": null,
+    "descripcion": null, "historia": null, "ingredientes": [],
+    "color": "#B84D8A", "colorOscuro": "#8A2860",
+    "logo": null, "imagen": null, "maps_url": null,
+    "contacto": { "whatsapp": null, "instagram": null, "email": null, "web": null }
+  },
+  {
+    "id": "9", "orden": 9,
+    "nombre": "Las Mutisias",
+    "galleta": null, "ubicacion": null, "coordenadas": null,
+    "descripcion": null, "historia": null, "ingredientes": [],
+    "color": "#CC4A28", "colorOscuro": "#A03010",
+    "logo": null, "imagen": null, "maps_url": null,
+    "contacto": { "whatsapp": null, "instagram": null, "email": null, "web": null }
+  },
+  {
+    "id": "10", "orden": 10,
+    "nombre": "Valle Andino",
+    "galleta": null, "ubicacion": null, "coordenadas": null,
+    "descripcion": null, "historia": null, "ingredientes": [],
+    "color": "#3B6B9A", "colorOscuro": "#1F4769",
+    "logo": null, "imagen": null, "maps_url": null,
+    "contacto": { "whatsapp": null, "instagram": null, "email": null, "web": null }
+  },
+  {
+    "id": "11", "orden": 11,
+    "nombre": "Peonias",
+    "galleta": null, "ubicacion": null, "coordenadas": null,
+    "descripcion": null, "historia": null, "ingredientes": [],
+    "color": "#C0527A", "colorOscuro": "#8C2E54",
+    "logo": null, "imagen": null, "maps_url": null,
+    "contacto": { "whatsapp": null, "instagram": null, "email": null, "web": null }
+  },
+  {
+    "id": "12", "orden": 12,
+    "nombre": "La Floral",
+    "galleta": null, "ubicacion": null, "coordenadas": null,
+    "descripcion": null, "historia": null, "ingredientes": [],
+    "color": "#5A7A3C", "colorOscuro": "#3A5820",
+    "logo": null, "imagen": null, "maps_url": null,
+    "contacto": { "whatsapp": null, "instagram": null, "email": null, "web": null }
+  },
+  {
+    "id": "13", "orden": 13,
+    "nombre": "Viñas del Nant y Fall",
+    "galleta": null, "ubicacion": null, "coordenadas": null,
+    "descripcion": null, "historia": null, "ingredientes": [],
+    "color": "#5C2D7A", "colorOscuro": "#3C1852",
+    "logo": null, "imagen": null, "maps_url": null,
+    "contacto": { "whatsapp": null, "instagram": null, "email": null, "web": null }
+  },
+  {
+    "id": "14", "orden": 14,
+    "nombre": "Caricias del Bosque",
+    "galleta": null, "ubicacion": null, "coordenadas": null,
+    "descripcion": null, "historia": null, "ingredientes": [],
+    "color": "#2D5C3E", "colorOscuro": "#1A3C24",
+    "logo": null, "imagen": null, "maps_url": null,
+    "contacto": { "whatsapp": null, "instagram": null, "email": null, "web": null }
+  }
+]

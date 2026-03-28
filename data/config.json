@@ -1,0 +1,13 @@
+{
+  "nombre":       "Ruta de las Galletas Patagónicas",
+  "subtitulo":    "Patagonia · Argentina",
+  "descripcion":  "La Ruta de las Galletas Patagónicas reúne a 14 productores artesanales que elaboran galletas con identidad local, usando ingredientes de la región y recetas únicas. Cada parada es una historia. Cada galleta, un pedazo de Patagonia.",
+  "logo":         null,
+  "colorPrimario":"#1A2518",
+  "colorAcento":  "#C08A3E",
+  "stats": [
+    { "numero": "14",   "label": "Productores" },
+    { "numero": "1",    "label": "Ruta" },
+    { "numero": "100%", "label": "Artesanal" }
+  ]
+}

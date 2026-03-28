@@ -1,0 +1,5 @@
+# Proteger archivos de configuración del admin
+<Files "admin-config.json">
+    Order Allow,Deny
+    Deny from all
+</Files>
