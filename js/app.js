@@ -60,10 +60,8 @@ function applyConfig() {
 
   /* Logo de la ruta */
   if (CONFIG.logo) {
-    const logoImg = document.getElementById('sidebar-logo');
-    const logoSvg = document.getElementById('sidebar-logo-default');
-    if (logoImg) { logoImg.src = CONFIG.logo; logoImg.hidden = false; }
-    if (logoSvg) logoSvg.hidden = true;
+    const sidebarLogo = document.getElementById('sidebar-logo');
+    if (sidebarLogo) { sidebarLogo.src = CONFIG.logo; sidebarLogo.hidden = false; }
 
     const inicioLogo = document.getElementById('inicio-logo');
     if (inicioLogo) { inicioLogo.src = CONFIG.logo; inicioLogo.hidden = false; }
@@ -192,14 +190,19 @@ function openDetail(index) {
 
   /* Mostrar overlay */
   overlay.removeAttribute('hidden');
-  requestAnimationFrame(() => overlay.classList.add('open'));
+  requestAnimationFrame(() => {
+    overlay.classList.add('open');
+    /* Inicializar mapa exactamente cuando termina la animación de entrada */
+    overlay.addEventListener('transitionend', function onTransitionEnd() {
+      overlay.removeEventListener('transitionend', onTransitionEnd);
+      initMap(p);
+    }, { once: true });
+  });
 
   history.pushState({ producerIndex: index }, '', `#productor-${index + 1}`);
 
   const scroll = document.getElementById('det-scroll');
   if (scroll) scroll.scrollTop = 0;
-
-  setTimeout(() => initMap(p), 420);
 }
 
 function closeDetail() {
@@ -261,10 +264,18 @@ function renderDetailActions(p) {
 }
 
 function initMap(producer) {
-  const container = document.getElementById('detail-map');
-  if (!container) return;
+  const wrap = document.querySelector('.det-map-wrap');
+  if (!wrap) return;
 
+  /* Destruir mapa anterior si existe */
   if (currentMap) { currentMap.remove(); currentMap = null; }
+
+  /* Recrear el contenedor para evitar estado residual de Leaflet */
+  const oldContainer = document.getElementById('detail-map');
+  if (oldContainer) oldContainer.remove();
+  const container = document.createElement('div');
+  container.id = 'detail-map';
+  wrap.insertBefore(container, wrap.firstChild);
 
   if (!producer.coordenadas?.lat) {
     container.innerHTML = `
@@ -281,7 +292,7 @@ function initMap(producer) {
   }
 
   const { lat, lng } = producer.coordenadas;
-  currentMap = L.map('detail-map', { zoomControl: true, scrollWheelZoom: false })
+  currentMap = L.map(container, { zoomControl: true, scrollWheelZoom: false })
     .setView([lat, lng], 14);
 
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -307,7 +318,9 @@ function initMap(producer) {
     .bindPopup(`<strong>${esc(producer.nombre)}</strong>${producer.ubicacion ? '<br>' + esc(producer.ubicacion) : ''}`)
     .openPopup();
 
-  setTimeout(() => currentMap?.invalidateSize(), 200);
+  /* invalidateSize en dos momentos para garantizar que las tiles se rendericen bien */
+  setTimeout(() => currentMap?.invalidateSize(), 50);
+  setTimeout(() => currentMap?.invalidateSize(), 300);
 }
 
 /* ════════ NAVEGACIÓN ════════ */
