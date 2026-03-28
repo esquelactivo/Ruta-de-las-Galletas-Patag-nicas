@@ -72,6 +72,16 @@ img { display: block; max-width: 100%; }
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
+.sidebar__brand-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  object-fit: contain;
+  background: rgba(255,255,255,0.12);
+  padding: 3px;
+  flex-shrink: 0;
+}
+
 .sidebar__brand-name {
   display: block;
   font-family: 'Playfair Display', serif;
@@ -201,6 +211,18 @@ img { display: block; max-width: 100%; }
   display: flex;
   flex-direction: column;
   padding: 52px 32px 36px;
+}
+
+.inicio__logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  object-fit: contain;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 6px;
+  display: block;
+  margin-bottom: 16px;
 }
 
 .chip {
@@ -345,6 +367,22 @@ img { display: block; max-width: 100%; }
   overflow: hidden;
   background-size: cover;
   background-position: center;
+}
+
+/* Producer logo badge on card */
+.card__logo {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: white;
+  border: 2px solid rgba(255,255,255,0.9);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.22);
+  object-fit: contain;
+  padding: 3px;
+  z-index: 2;
 }
 
 /* When there's no real image, uses gradient (set via JS inline style) */
@@ -550,7 +588,40 @@ img { display: block; max-width: 100%; }
     var(--producer-color, var(--primary)) 0%,
     var(--producer-color-dark, #0E1610) 100%
   );
-  transition: background 0.3s ease;
+  background-size: cover;
+  background-position: center top;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+/* Dark overlay when cover photo is set */
+.det-hero.has-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.88) 0%,
+    rgba(0,0,0,0.45) 50%,
+    rgba(0,0,0,0.15) 100%
+  );
+  pointer-events: none;
+}
+/* Keep content above overlay */
+.det-hero > * { position: relative; z-index: 1; }
+
+/* Producer logo in hero */
+.det-hero__logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
+  background: white;
+  border: 3px solid rgba(255,255,255,0.9);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+  object-fit: contain;
+  padding: 6px;
+  margin-bottom: 18px;
+  display: block;
 }
 
 .det-hero__num {
@@ -738,6 +809,15 @@ img { display: block; max-width: 100%; }
 }
 .det-btn:active { opacity: 0.85; transform: scale(0.97); }
 
+.det-btn--whatsapp {
+  background: #25D366;
+  color: white;
+}
+.det-btn--call {
+  background: var(--surface-2);
+  color: var(--primary);
+  border: 1px solid var(--border);
+}
 .det-btn--contact {
   background: var(--producer-color, var(--primary));
   color: white;

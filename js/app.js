@@ -58,6 +58,17 @@ function applyConfig() {
     }
   }
 
+  /* Logo de la ruta */
+  if (CONFIG.logo) {
+    const logoImg = document.getElementById('sidebar-logo');
+    const logoSvg = document.getElementById('sidebar-logo-default');
+    if (logoImg) { logoImg.src = CONFIG.logo; logoImg.hidden = false; }
+    if (logoSvg) logoSvg.hidden = true;
+
+    const inicioLogo = document.getElementById('inicio-logo');
+    if (inicioLogo) { inicioLogo.src = CONFIG.logo; inicioLogo.hidden = false; }
+  }
+
   /* Título de la pestaña */
   if (CONFIG.nombre) document.title = CONFIG.nombre;
 }
@@ -85,11 +96,15 @@ function renderCards() {
       ? `<svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 1C3.57 1 2 2.57 2 4.5c0 2.625 3.5 7 3.5 7S9 7.125 9 4.5C9 2.57 7.43 1 5.5 1zm0 4.25a.75.75 0 110-1.5.75.75 0 010 1.5z" fill="currentColor"/></svg>${esc(p.ubicacion)}`
       : '&mdash;';
 
+    const logoOrLetter = p.logo
+      ? `<img class="card__logo" src="${p.logo}" alt="${esc(p.nombre)}">`
+      : `<span style="position:absolute;bottom:10px;left:12px;font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:rgba(255,255,255,0.9)">${esc(letter)}</span>`;
+
     return `
       <article class="card" role="listitem" style="animation-delay:${delay}s" data-index="${i}">
         <div class="card__img" style="${imgStyle}" data-num="${num}">
           <div class="card__img-overlay"></div>
-          ${!p.imagen ? `<span style="position:absolute;bottom:10px;left:12px;font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:rgba(255,255,255,0.9)">${esc(letter)}</span>` : ''}
+          ${logoOrLetter}
         </div>
         <div class="card__body">
           <p class="card__num">Parada ${num}</p>
@@ -147,6 +162,28 @@ function openDetail(index) {
     ? `<p class="det-text">${esc(p.historia)}</p>`
     : `<p class="det-placeholder">Historia del productor próximamente.</p>`;
 
+  /* Hero: foto de portada como fondo */
+  const hero = document.getElementById('det-hero');
+  if (p.imagen) {
+    hero.style.backgroundImage = `url('${p.imagen}')`;
+    hero.classList.add('has-cover');
+  } else {
+    hero.style.backgroundImage = '';
+    hero.classList.remove('has-cover');
+  }
+
+  /* Hero: logo del productor */
+  const heroLogo = document.getElementById('det-hero-logo');
+  if (heroLogo) {
+    if (p.logo) {
+      heroLogo.src = p.logo;
+      heroLogo.alt = p.nombre;
+      heroLogo.hidden = false;
+    } else {
+      heroLogo.hidden = true;
+    }
+  }
+
   /* Dirección */
   document.getElementById('det-address').textContent = p.ubicacion || 'Dirección por confirmar';
 
@@ -162,7 +199,7 @@ function openDetail(index) {
   const scroll = document.getElementById('det-scroll');
   if (scroll) scroll.scrollTop = 0;
 
-  setTimeout(() => initMap(p), 320);
+  setTimeout(() => initMap(p), 420);
 }
 
 function closeDetail() {
@@ -175,20 +212,38 @@ function closeDetail() {
 }
 
 function renderDetailActions(p) {
+  const btnWa      = document.getElementById('det-btn-whatsapp');
+  const btnCall    = document.getElementById('det-btn-call');
   const btnContact = document.getElementById('det-btn-contact');
   const btnMap     = document.getElementById('det-btn-map');
 
-  /* Contacto */
+  /* Reset: ocultar todos los de contacto */
+  btnWa.hidden = btnCall.hidden = btnContact.hidden = true;
+
+  /* WhatsApp */
   if (p.contacto?.whatsapp) {
-    btnContact.onclick = () => window.open(`https://wa.me/${p.contacto.whatsapp.replace(/\D/g,'')}`, '_blank');
-  } else if (p.contacto?.instagram) {
-    btnContact.onclick = () => window.open(`https://instagram.com/${p.contacto.instagram.replace('@','')}`, '_blank');
-  } else if (p.contacto?.email) {
-    btnContact.onclick = () => { window.location.href = `mailto:${p.contacto.email}`; };
-  } else if (p.contacto?.web) {
-    btnContact.onclick = () => window.open(p.contacto.web, '_blank');
-  } else {
-    btnContact.onclick = () => alert('Información de contacto próximamente.');
+    btnWa.hidden = false;
+    btnWa.onclick = () => window.open(`https://wa.me/${p.contacto.whatsapp.replace(/\D/g,'')}`, '_blank');
+  }
+
+  /* Llamar por teléfono */
+  if (p.contacto?.telefono) {
+    btnCall.hidden = false;
+    btnCall.onclick = () => { window.location.href = `tel:${p.contacto.telefono.replace(/\D/g,'')}`; };
+  }
+
+  /* Contacto genérico (Instagram / email / web) solo si no hay WA ni teléfono */
+  if (!p.contacto?.whatsapp && !p.contacto?.telefono) {
+    if (p.contacto?.instagram || p.contacto?.email || p.contacto?.web) {
+      btnContact.hidden = false;
+      if (p.contacto?.instagram) {
+        btnContact.onclick = () => window.open(`https://instagram.com/${p.contacto.instagram.replace('@','')}`, '_blank');
+      } else if (p.contacto?.email) {
+        btnContact.onclick = () => { window.location.href = `mailto:${p.contacto.email}`; };
+      } else {
+        btnContact.onclick = () => window.open(p.contacto.web, '_blank');
+      }
+    }
   }
 
   /* Cómo llegar */
@@ -252,7 +307,7 @@ function initMap(producer) {
     .bindPopup(`<strong>${esc(producer.nombre)}</strong>${producer.ubicacion ? '<br>' + esc(producer.ubicacion) : ''}`)
     .openPopup();
 
-  setTimeout(() => currentMap?.invalidateSize(), 100);
+  setTimeout(() => currentMap?.invalidateSize(), 200);
 }
 
 /* ════════ NAVEGACIÓN ════════ */
@@ -333,5 +388,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   initInstall();
 
   document.getElementById('det-back').addEventListener('click', () => history.back());
+  /* Los botones de acción se configuran dinámicamente en renderDetailActions() */
   document.querySelector('.inicio__cta')?.addEventListener('click', () => switchScreen('ruta'));
 });

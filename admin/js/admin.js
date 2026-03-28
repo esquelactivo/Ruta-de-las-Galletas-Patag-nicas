@@ -277,6 +277,10 @@ function renderModalBody(p) {
             <input class="field-input" id="f-whatsapp" type="tel" value="${esc(v(p?.contacto?.whatsapp))}" placeholder="+5492944000000">
           </div>
           <div class="field-group">
+            <label class="field-label">Teléfono (para llamadas)</label>
+            <input class="field-input" id="f-telefono" type="tel" value="${esc(v(p?.contacto?.telefono))}" placeholder="+5492944000000">
+          </div>
+          <div class="field-group">
             <label class="field-label">Instagram</label>
             <input class="field-input" id="f-instagram" type="text" value="${esc(v(p?.contacto?.instagram))}" placeholder="@nombre">
           </div>
@@ -484,6 +488,7 @@ async function saveProducer() {
     maps_url:    document.getElementById('f-maps')?.value.trim()       || null,
     contacto: {
       whatsapp:  document.getElementById('f-whatsapp')?.value.trim()   || null,
+      telefono:  document.getElementById('f-telefono')?.value.trim()   || null,
       instagram: document.getElementById('f-instagram')?.value.trim()  || null,
       email:     document.getElementById('f-email')?.value.trim()      || null,
       web:       document.getElementById('f-web')?.value.trim()        || null,
