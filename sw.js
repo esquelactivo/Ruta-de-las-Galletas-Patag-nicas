@@ -1,11 +1,14 @@
 /* ============================================================
    RUTA DE LAS GALLETAS PATAGÓNICAS — Service Worker
-   Estrategia: Cache-first para assets propios + Google Fonts
-   Incrementá la versión (v1 → v2, etc.) al publicar cambios.
+   - App shell (HTML/CSS/JS/icons): cache-first
+   - data/*.json y uploads/*:       network-first (siempre fresco)
+   - Google Fonts:                  cache-first, long-lived
+   Incrementá CACHE_APP al publicar cambios en el código.
    ============================================================ */
 
 const CACHE_APP   = 'rgp-app-v4';
 const CACHE_FONTS = 'rgp-fonts-v1';
+const CACHE_DATA  = 'rgp-data-v1';
 
 const APP_ASSETS = [
   './',
@@ -28,7 +31,7 @@ self.addEventListener('install', (event) => {
 
 /* ===== ACTIVATE — purge old caches ===== */
 self.addEventListener('activate', (event) => {
-  const keep = [CACHE_APP, CACHE_FONTS];
+  const keep = [CACHE_APP, CACHE_FONTS, CACHE_DATA];
   event.waitUntil(
     caches.keys()
       .then(keys => Promise.all(
@@ -58,21 +61,40 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  /* Same-origin requests — cache-first, fallback to network, then index.html */
-  if (url.origin === self.location.origin) {
-    event.respondWith(
-      caches.match(request).then(cached => {
-        if (cached) return cached;
+  if (url.origin !== self.location.origin) return;
 
-        return fetch(request)
-          .then(response => {
-            if (response.ok && request.method === 'GET') {
-              caches.open(CACHE_APP).then(c => c.put(request, response.clone()));
-            }
-            return response;
-          })
-          .catch(() => caches.match('./index.html'));
-      })
+  /* data/*.json y uploads/* — network-first, fallback a caché offline */
+  const isData    = url.pathname.includes('/data/');
+  const isUpload  = url.pathname.includes('/uploads/');
+
+  if (isData || isUpload) {
+    event.respondWith(
+      fetch(request)
+        .then(response => {
+          if (response.ok) {
+            caches.open(CACHE_DATA).then(c => c.put(request, response.clone()));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request, { cacheName: CACHE_DATA }))
     );
+    return;
   }
+
+  /* App shell — cache-first, fallback a network */
+  event.respondWith(
+    caches.match(request).then(cached => {
+      if (cached) return cached;
+
+      return fetch(request)
+        .then(response => {
+          if (response.ok && request.method === 'GET') {
+            caches.open(CACHE_APP).then(c => c.put(request, response.clone()));
+          }
+          return response;
+        })
+        .catch(() => caches.match('./index.html'));
+    })
+  );
 });
+
