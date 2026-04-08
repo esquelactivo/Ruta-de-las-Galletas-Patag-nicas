@@ -148,6 +148,9 @@ function openDetail(index) {
   else
     galHtml += `<p class="det-placeholder">Nombre de la galleta por definir</p>`;
 
+  if (p.galletaSubtitulo)
+    galHtml += `<p class="det-galleta-subtitulo">${esc(p.galletaSubtitulo)}</p>`;
+
   if (p.ingredientes?.length) {
     galHtml += `<p class="det-ingredientes-label">Ingredientes</p><div class="det-ingredientes">`;
     galHtml += p.ingredientes.map(i => `<span class="det-ing-tag">${esc(i)}</span>`).join('');
@@ -192,11 +195,18 @@ function openDetail(index) {
   overlay.removeAttribute('hidden');
   requestAnimationFrame(() => {
     overlay.classList.add('open');
-    /* Inicializar mapa exactamente cuando termina la animación de entrada */
-    overlay.addEventListener('transitionend', function onTransitionEnd() {
-      overlay.removeEventListener('transitionend', onTransitionEnd);
-      initMap(p);
-    }, { once: true });
+    /* Inicializar mapa cuando termina la animación de entrada.
+       Filtramos e.target === overlay para ignorar transiciones de hijos.
+       Un timeout de fallback garantiza que el mapa se inicialice aunque
+       transitionend no dispare sobre el overlay (ej. modo reducción de movimiento). */
+    let mapDone = false;
+    const doMap = () => { if (mapDone) return; mapDone = true; initMap(p); };
+    overlay.addEventListener('transitionend', function onTE(e) {
+      if (e.target !== overlay) return;
+      overlay.removeEventListener('transitionend', onTE);
+      doMap();
+    });
+    setTimeout(doMap, 420);
   });
 
   history.pushState({ producerIndex: index }, '', `#productor-${index + 1}`);

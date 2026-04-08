@@ -6,7 +6,7 @@
    Incrementá CACHE_APP al publicar cambios en el código.
    ============================================================ */
 
-const CACHE_APP   = 'rgp-app-v4';
+const CACHE_APP   = 'rgp-app-v5';
 const CACHE_FONTS = 'rgp-fonts-v1';
 const CACHE_DATA  = 'rgp-data-v1';
 

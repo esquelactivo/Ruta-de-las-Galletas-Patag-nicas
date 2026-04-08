@@ -184,6 +184,10 @@ function renderModalBody(p) {
             <input class="field-input" id="f-galleta" type="text" value="${esc(v(p?.galleta))}" placeholder="Ej: Galleta de rosa mosqueta">
           </div>
           <div class="field-group">
+            <label class="field-label">Subtítulo de la galleta</label>
+            <input class="field-input" id="f-galleta-subtitulo" type="text" value="${esc(v(p?.galletaSubtitulo))}" placeholder="Ej: Elaborada con ingredientes locales de la Patagonia">
+          </div>
+          <div class="field-group">
             <label class="field-label">Descripción corta (para la tarjeta)</label>
             <input class="field-input" id="f-descripcion" type="text" value="${esc(v(p?.descripcion))}" placeholder="Máx. 80 caracteres">
           </div>
@@ -478,8 +482,9 @@ async function saveProducer() {
 
   const data = {
     nombre,
-    galleta:     document.getElementById('f-galleta')?.value.trim()    || null,
-    descripcion: document.getElementById('f-descripcion')?.value.trim()|| null,
+    galleta:          document.getElementById('f-galleta')?.value.trim()          || null,
+    galletaSubtitulo: document.getElementById('f-galleta-subtitulo')?.value.trim()|| null,
+    descripcion:      document.getElementById('f-descripcion')?.value.trim()      || null,
     historia:    document.getElementById('f-historia')?.value.trim()   || null,
     color:       document.getElementById('f-color')?.value             || '#1A2518',
     colorOscuro: document.getElementById('f-color-dark')?.value        || '#0E1610',
